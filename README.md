@@ -1,10 +1,10 @@
 # start-fastapi
 
-a small web framework based on fastapi
+a lightweight web server framework based on fastapi
 
 基于[FastAPI](https://github.com/tiangolo/fastapi)的简易Web后端开发框架
 
-简单组织了一下目录结构，详细文档可以参考[FastAPI文档](https://fastapi.tiangolo.com/)
+简单组织了一下目录与数据结构，详细文档可以参考[FastAPI文档](https://fastapi.tiangolo.com/)
 
 ## Requirements
 
