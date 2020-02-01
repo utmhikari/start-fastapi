@@ -1,2 +1,5 @@
+from application.controller import success
+
+
 def get_root():
-    return {'Hello': 'World'}
+    return success({'Hello': 'World'})

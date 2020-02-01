@@ -1,9 +1,17 @@
 from fastapi import FastAPI
-from controller import base, item
+from config import router
+import uvicorn
+import json
 
 app = FastAPI()
 
-# router -> controller callback
-app.get('/')(base.get_root)
-app.get('/items/{item_id}')(item.get_item)
-app.put('/items/{item_id}')(item.save_item)
+router.register_controllers(app)
+router.register_middlewares(app)
+
+app_cfg = json.loads(open('./config/app.json').read())
+logger_cfg = json.loads(open('./config/logger.json').read())
+
+if __name__ == '__main__':
+    uvicorn.run('main:app', **dict(app_cfg, **{
+        'log_config': logger_cfg,
+    }))

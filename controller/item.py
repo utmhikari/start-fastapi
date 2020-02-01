@@ -1,10 +1,21 @@
 from service import item as item_service
 from model.item import Item
+from application.controller import get_logger, success, error
+
+LOGGER = get_logger('ITEM')
 
 
-def get_item(item_id: int) -> Item:
-    return item_service.get_item(item_id)
+def get_item(item_id: int):
+    LOGGER.info('Get item with id: %d' % item_id)
+    item = item_service.get_item(item_id)
+    if not item:
+        return error(msg='Cannot found item with id %d' % item_id)
+    return success(item)
 
 
-def save_item(item_id: int, item: Item) -> Item:
-    return item if item_service.save_item(item_id, item) else None
+def update_item(item_id: int, item: Item):
+    LOGGER.info('Update item with id: %d' % item_id)
+    ok = item_service.update_item(item_id, item)
+    if not ok:
+        return error(data=None, msg='Cannot found item with id %d' % item_id)
+    return success(item)
