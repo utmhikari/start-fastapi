@@ -21,7 +21,7 @@ def success(data: Any = None, msg: str = '') -> Dict[str, Any]:
     return {
         'data': data,
         'success': True,
-        'msg': msg,
+        'message': msg,
         'code': 0,
     }
 
@@ -37,6 +37,6 @@ def error(data: Any = None, msg: str = '', code: int = -1) -> Dict[str, Any]:
     return {
         'data': data,
         'success': False,
-        'msg': msg,
+        'message': msg,
         'code': code,
     }

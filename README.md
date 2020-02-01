@@ -8,14 +8,30 @@ a lightweight web server framework based on fastapi
 
 整个框架在fasiapi基础上梳理了目录结构、配置等容易踩坑的内容，这样业务就能基本专心写crud了
 
+## References
+
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [Starlette](https://www.starlette.io/)
+- [Uvicorn](https://www.uvicorn.org/)
+
 ## Requirements
 
 - python 3.6+ (for static typing check)
 - pip3 install fastapi uvicorn
 
-## Usage
+## Structure
 
-### Run Example
+- application: base apis for app modules (controllers, middlewares, services, etc)
+- config: config files and scripts
+- controller: controller modules with router callbacks
+- middleware: middlewares
+- model: internal data models for typing check
+- service: service libraries
+- main.py: server entry
+
+## First Steps
+
+### Date
 
 the whole initial project is the example
 
@@ -30,15 +46,26 @@ cd to root dir and run `python3 ./main.py` to start the server
 - if logging is needed, call `get_logger` func from `application.xxx` to get the logger
 - cd to root dir and run `python3 ./main.py`
 
-## Structure
+## Requests and Responses
 
-- application: base apis for app modules (controllers, middlewares, services, etc)
-- config: config files and scripts
-- controller: controller modules with router callbacks
-- middleware: middlewares
-- model: internal data models for typing check
-- service: service libraries
-- main.py: server entry
+all handled requests have status code of 200
+
+if a request is not successfully handled, users should call `error` in `application.controller` to wrap the response body
+
+otherwise, call `success` in `application.controller` to wrap the resp body
+
+The request body schema is defined on user, view [FastAPI Request Body](https://fastapi.tiangolo.com/tutorial/body/) for details
+
+The base schema of response body is:
+
+```text
+{
+  "success": bool,
+  "message": string,
+  "code": int,
+  "data": any,
+}
+```
 
 ## Customization
 
@@ -61,12 +88,7 @@ references on app and logger cfg:
 - [uvicorn settings](https://www.uvicorn.org/settings/)
 - [config.py](https://github.com/encode/uvicorn/blob/master/uvicorn/config.py)
 
-### Miscs
-
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [Starlette](https://www.starlette.io/)
-- [Uvicorn](https://www.uvicorn.org/)
-
 ## TODO
 
 - deployment
+- error handle
