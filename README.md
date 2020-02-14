@@ -17,28 +17,27 @@ a lightweight web server framework based on fastapi
 ## Requirements
 
 - python 3.6+ (for static typing check)
-- pip3 install fastapi uvicorn
+- pip3 install -r ./requirements.txt (using venv is recommended)
 
 ## Structure
 
-- application: base apis for app modules (controllers, middlewares, services, etc)
-- config: config files and scripts
+- application: base apis for app modules (controllers, middlewares, services, router, etc)
+- config: config files (json)
 - controller: controller modules with router callbacks
 - middleware: middlewares
 - model: internal data models for typing check
 - service: service libraries
+- test: custom test scripts
 - main.py: server entry
 
-## First Steps
+## Tutorial
 
 ### Example
 
-the whole initial project is the example
+the whole initial project is the example, cd to root dir and run `./script/dev.sh` to start the server
 
-cd to root dir and run `python3 ./main.py` to start the server
+if you want to code your own logic then:
 
-### Code Your First Project
- 
 - add controller routes in `config/router.py` and write corresponding callbacks in `./controller`
 - according to your controllers, write pylibs in `./service`
 - write models in `./model` for services and controllers to enhance the robustness of code
@@ -46,7 +45,7 @@ cd to root dir and run `python3 ./main.py` to start the server
 - if logging is needed, call `get_logger` func from `application.xxx` to get the logger
 - cd to root dir and run `python3 ./main.py`
 
-## Requests and Responses
+### Requests and Responses
 
 all handled requests have status code of 200
 
@@ -67,14 +66,21 @@ The base schema of response body is:
 }
 ```
 
+### export your requirements
+
+while working collaboratively, each member should synchronize the libraries if needed
+
+run `pip freeze > requirements.txt` or `./script/export.sh` (if venv dir included) before commit
+
 ## Customization
 
 ### Configuration
 
 The main.py will do these tasks while initializing:
 
-- load base application config on `config/app.json`
-- load logging config on `config/logger.json` as uvicorn overwrites logging module
+- load base application config on `config/dev.cfg` or `config/prod.cfg` based on `-e` arg to `main.py`
+  - for example, run `python3 main.py -e prod`, will run app using `prod.cfg`
+- the `config/dev.cfg` or `config/prod.cfg` will hold an option on logger config path, so that `config/logger/logger.cfg` will overwrite uvicorn logging config
 - register controller callbacks in `config/router.py`
 
 so users should:
