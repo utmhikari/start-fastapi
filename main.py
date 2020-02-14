@@ -1,17 +1,34 @@
 from fastapi import FastAPI
-from config import router
+from application import router, config
 import uvicorn
-import json
+import sys
+import getopt
 
 app = FastAPI()
-
 router.register_controllers(app)
 router.register_middlewares(app)
 
-app_cfg = json.loads(open('./config/app.json').read())
-logger_cfg = json.loads(open('./config/logger.json').read())
+
+def main():
+    # get application config
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], 'e:', ['env='])  # no error handling here
+    except getopt.GetoptError as e:
+        raise e
+    for o, a in opts:
+        if o == '-e':
+            if a == 'prod':
+                print('Application running in production mode...')
+                config.load_cfg('prod')
+    if not config.get_instance():
+        print('Application running in development mode...')
+        config.load_cfg('dev')
+        cfg = config.get_instance()
+        if not cfg:
+            raise Exception('Failed to load config!')
+    # run application
+    uvicorn.run('main:app', **config.get_app_cfg())
+
 
 if __name__ == '__main__':
-    uvicorn.run('main:app', **dict(app_cfg, **{
-        'log_config': logger_cfg,
-    }))
+    main()

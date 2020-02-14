@@ -31,13 +31,13 @@ a lightweight web server framework based on fastapi
 
 ## First Steps
 
-### Date
+### Example
 
 the whole initial project is the example
 
 cd to root dir and run `python3 ./main.py` to start the server
 
-### 419
+### Code Your First Project
  
 - add controller routes in `config/router.py` and write corresponding callbacks in `./controller`
 - according to your controllers, write pylibs in `./service`
