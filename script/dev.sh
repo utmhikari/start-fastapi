@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-python3 main.py
+./venv/Scripts/python main.py
