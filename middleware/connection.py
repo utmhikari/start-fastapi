@@ -1,9 +1,9 @@
 from starlette.requests import Request
 from starlette.responses import StreamingResponse
-from application.middleware import get_logger
+from application.logger import get_middleware_logger
 import datetime
 
-LOGGER = get_logger('CONNECTION')
+LOGGER = get_middleware_logger('CONNECTION')
 
 
 async def calc_time(request: Request, nxt):

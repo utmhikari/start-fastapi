@@ -1,8 +1,8 @@
 from typing import Dict
 from model.item import Item
-from application.service import get_logger
+from application.logger import get_service_logger
 
-LOGGER = get_logger('ITEM')
+LOGGER = get_service_logger('ITEM')
 
 _ITEMS: Dict[int, Item] = {
     1: Item(name='haha', price=1.1),

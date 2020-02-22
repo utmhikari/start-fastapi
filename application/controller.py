@@ -1,14 +1,4 @@
 from typing import Any, Dict
-import logging
-
-
-def get_logger(name):
-    """
-    get middleware logger
-    :param name: middleware name
-    :return: middleware logger
-    """
-    return logging.getLogger('CONTROLLER_' + str(name).upper())
 
 
 def success(data: Any = None, msg: str = '') -> Dict[str, Any]:

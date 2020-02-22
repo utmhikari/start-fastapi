@@ -1,8 +1,10 @@
 from service import item as item_service
 from model.item import Item
-from application.controller import get_logger, success, error
+from application.controller import success, error
+from application.logger import get_controller_logger
 
-LOGGER = get_logger('ITEM')
+
+LOGGER = get_controller_logger('ITEM')
 
 
 def get_item(item_id: int):
