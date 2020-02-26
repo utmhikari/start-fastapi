@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-./venv/Scripts/pip install --user -r ./requirements.txt
+BIN_DIR=./venv/Scripts
+
+if [ ! -d "$BIN_DIR" ]; then
+  BIN_DIR=./venv/bin
+fi
+
+$BIN_DIR/pip install --user -r ./requirements.txt
