@@ -78,9 +78,9 @@ run `pip freeze > requirements.txt` or `./script/export.sh` (if venv dir include
 
 The main.py will do these tasks while initializing:
 
-- load base application config on `config/dev.cfg` or `config/prod.cfg` based on `-e` arg to `main.py`
-  - for example, run `python3 main.py -e prod`, will run app using `prod.cfg`
-- the `config/dev.cfg` or `config/prod.cfg` will hold an option on logger config path, so that `config/logger/logger.cfg` will overwrite uvicorn logging config
+- load base application config on `config/dev.cfg` or `config/prod.json` based on `-e` arg to `main.py`
+  - for example, run `python3 main.py -e prod`, will run app using `prod.json`
+- the `config/dev.json` or `config/prod.json` will hold an option on logger config path, so that `config/logger/logger.json` will overwrite uvicorn logging config
 - register controller callbacks in `config/router.py`
 
 so users should:
