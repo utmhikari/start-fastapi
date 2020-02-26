@@ -3,7 +3,8 @@
     "host": "0.0.0.0",
     "port": 8000,
     "reload": true,
-    "debug": false
+    "debug": false,
+    "use_colors": true
   },
   "logger": {
     "path": "logger/logger.json"
