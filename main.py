@@ -1,17 +1,9 @@
-from fastapi import FastAPI
-from application import router
 from typing import Dict, Any
 import uvicorn
 import sys
 import getopt
 import os
 import json
-
-
-# init app
-app = FastAPI()
-router.register_controllers(app)
-router.register_middlewares(app)
 
 # load config
 _CONFIG: Dict[str, Any] = dict()
@@ -85,7 +77,7 @@ def main():
         if not _CONFIG:
             raise Exception('Failed to load config!')
     # run application
-    uvicorn.run('main:app', **_CONFIG[_APP_KEY])
+    uvicorn.run('app:app', **_CONFIG[_APP_KEY])
 
 
 if __name__ == '__main__':
