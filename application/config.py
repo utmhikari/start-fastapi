@@ -5,8 +5,8 @@ import os
 
 _CONFIG: Dict[str, Any] = dict()
 _CONFIG_ROOT: str = 'config'
-_DEV_CONFIG_PATH: str = 'dev.cfg'
-_PROD_CONFIG_PATH: str = 'prod.cfg'
+_DEV_CONFIG_PATH: str = 'dev.json'
+_PROD_CONFIG_PATH: str = 'prod.json'
 _APP_MODE: str = 'dev'
 _APP_KEY: str = 'fastapi'
 

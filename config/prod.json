@@ -6,7 +6,6 @@
     "debug": false
   },
   "logger": {
-    "path": "logger/logger.cfg"
+    "path": "logger/logger.json"
   }
 }
-
