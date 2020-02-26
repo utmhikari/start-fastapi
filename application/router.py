@@ -11,9 +11,8 @@ def register_controllers(app: FastAPI) -> None:
     :param app: fastapi app
     :return: None
     """
-    app.get('/')(base.get_root)
-    app.get('/items/{item_id}')(item.get_item)
-    app.put('/items/{item_id}')(item.update_item)
+    app.include_router(base.router)
+    app.include_router(item.router)
 
 
 def register_middlewares(app: FastAPI) -> None:
