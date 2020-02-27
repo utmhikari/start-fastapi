@@ -62,6 +62,7 @@ def _load_cfg(mode: str):
 
 def main():
     # get application config
+    # TODO: 解决config复用问题
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'e:', ['env='])  # no error handling here
     except getopt.GetoptError as e:

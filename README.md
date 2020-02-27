@@ -96,5 +96,5 @@ references on app and logger cfg:
 
 ## TODO
 
-- deployment
-- error handle
+- detach uvicorn config and custom config
+- deployment setting
