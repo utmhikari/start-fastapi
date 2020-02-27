@@ -83,10 +83,14 @@ The steps of initializing application:
 - app loads `config/app/logger.json` and `config/dev(prod).cfg` as logger and env config
 - app registers controllers and middlewares, which launches the import of all modules
 
-references on app and logger cfg:
+references on configuring app and logger json:
 
 - [uvicorn settings](https://www.uvicorn.org/settings/)
 - [config.py](https://github.com/encode/uvicorn/blob/master/uvicorn/config.py)
+
+references on configuring dev.cfg or prod.cfg:
+
+- [python-dotenv](https://github.com/theskumar/python-dotenv)
 
 ## TODO
 
