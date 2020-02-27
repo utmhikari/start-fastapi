@@ -76,18 +76,12 @@ run `pip freeze > requirements.txt` or `./script/export.sh` (if venv dir include
 
 ### Configuration
 
-The main.py will do these tasks while initializing:
+The steps of initializing application:
 
-- load base application config on `config/dev.cfg` or `config/prod.json` based on `-e` arg to `main.py`
-  - for example, run `python3 main.py -e prod`, will run app using `prod.json`
-- the `config/dev.json` or `config/prod.json` will hold an option on logger config path, so that `config/logger/logger.json` will overwrite uvicorn logging config
-- register controller callbacks in `config/router.py`
-
-so users should:
-
-- confirm if needed controllers/middlwares are registered
-- app is properly configured
-- logger is properly configured
+- user runs command `./venv/bin(Scripts)/python main.py (dev/prod)`
+- uvicorn starts `app.py` with cfg in `config/app/dev(prod).json`
+- app loads `config/app/logger.json` and `config/dev(prod).cfg` as logger and env config
+- app registers controllers and middlewares, which launches the import of all modules
 
 references on app and logger cfg:
 
@@ -96,5 +90,4 @@ references on app and logger cfg:
 
 ## TODO
 
-- detach uvicorn config and custom config
 - deployment setting

@@ -4,9 +4,10 @@
     "port": 8000,
     "reload": true,
     "debug": false,
-    "use_colors": true
+    "use_colors": true,
+    "env_file": "config/dev.cfg"
   },
   "logger": {
-    "path": "logger/logger.json"
+    "path": "logger.json"
   }
 }

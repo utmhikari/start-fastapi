@@ -4,9 +4,10 @@
     "port": 8000,
     "reload": false,
     "debug": false,
-    "use_colors": true
+    "use_colors": true,
+    "env_file": "prod.cfg"
   },
   "logger": {
-    "path": "logger/logger.json"
+    "path": "logger.json"
   }
 }

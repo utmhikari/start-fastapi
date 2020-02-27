@@ -5,9 +5,9 @@ import getopt
 import os
 import json
 
-# load config
+# load application config
 _CONFIG: Dict[str, Any] = dict()
-_CONFIG_ROOT: str = 'config'
+_CONFIG_ROOT: str = 'config/app'
 _DEV_CONFIG_PATH: str = 'dev.json'
 _PROD_CONFIG_PATH: str = 'prod.json'
 _APP_MODE: str = 'dev'
@@ -70,10 +70,8 @@ def main():
     for o, a in opts:
         if o == '-e':
             if a == 'prod':
-                print('Application running in production mode...')
                 _load_cfg('prod')
     if not _CONFIG:
-        print('Application running in development mode...')
         _load_cfg('dev')
         if not _CONFIG:
             raise Exception('Failed to load config!')
