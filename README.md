@@ -17,7 +17,7 @@ a lightweight web server framework based on fastapi
 ## Requirements
 
 - python 3.6+ (for static typing check)
-- pip3 install -r ./requirements.txt (using venv is recommended)
+- `pip3 install -r ./requirements.txt` (using venv is recommended)
 
 ## Structure
 
@@ -30,9 +30,27 @@ a lightweight web server framework based on fastapi
 - test: custom test scripts
 - main.py: server entry
 
-## Tutorial
+## Configuration
 
-### Example
+First let's see steps of initializing application:
+
+- user runs command `./venv/bin(Scripts)/python main.py (dev/prod)`
+- uvicorn starts `app.py` with cfg in `config/app/dev(prod).json`
+- app loads `config/app/logger.json` and `config/dev(prod).cfg` as logger and env config
+- app registers controllers and middlewares, which launches the import of all modules
+
+so we needed such references:
+
+references on configuring app and logger json:
+
+- [uvicorn settings](https://www.uvicorn.org/settings/)
+- [config.py](https://github.com/encode/uvicorn/blob/master/uvicorn/config.py)
+
+references on configuring dev.cfg or prod.cfg:
+
+- [python-dotenv](https://github.com/theskumar/python-dotenv)
+
+## Example
 
 the whole initial project is the example, cd to root dir and run `./script/dev.sh` to start the server
 
@@ -71,26 +89,6 @@ The base schema of response body is:
 while working collaboratively, each member should synchronize the libraries if needed
 
 run `pip freeze > requirements.txt` or `./script/export.sh` (if venv dir included) before commit
-
-## Customization
-
-### Configuration
-
-The steps of initializing application:
-
-- user runs command `./venv/bin(Scripts)/python main.py (dev/prod)`
-- uvicorn starts `app.py` with cfg in `config/app/dev(prod).json`
-- app loads `config/app/logger.json` and `config/dev(prod).cfg` as logger and env config
-- app registers controllers and middlewares, which launches the import of all modules
-
-references on configuring app and logger json:
-
-- [uvicorn settings](https://www.uvicorn.org/settings/)
-- [config.py](https://github.com/encode/uvicorn/blob/master/uvicorn/config.py)
-
-references on configuring dev.cfg or prod.cfg:
-
-- [python-dotenv](https://github.com/theskumar/python-dotenv)
 
 ## TODO
 
