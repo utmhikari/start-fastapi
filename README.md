@@ -20,6 +20,7 @@ a lightweight web server framework based on fastapi
 
 - python 3.6+ (for static typing check)
 - `pip3 install -r ./requirements.txt` (using venv is recommended)
+- idea/pycharm (optional but recommended)
 
 ## Structure
 
