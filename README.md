@@ -10,6 +10,8 @@ a lightweight web server framework based on fastapi
 
 ## References
 
+一般的文档在这3个地方找就ok了
+
 - [FastAPI](https://fastapi.tiangolo.com/)
 - [Starlette](https://www.starlette.io/)
 - [Uvicorn](https://www.uvicorn.org/)
@@ -20,6 +22,8 @@ a lightweight web server framework based on fastapi
 - `pip3 install -r ./requirements.txt` (using venv is recommended)
 
 ## Structure
+
+非常经典的的洋葱圈模型
 
 - application: base apis for app modules (controllers, middlewares, services, router, etc)
 - config: config files (json)
@@ -35,8 +39,9 @@ a lightweight web server framework based on fastapi
 First let's see steps of initializing application:
 
 - user runs command `./venv/bin(Scripts)/python main.py (dev/prod)`
-- uvicorn starts `app.py` with cfg in `config/app/dev(prod).json`
-- app loads `config/app/logger.json` and `config/dev(prod).cfg` as logger and env config
+- uvicorn launches `app.py` with cfg in `config/uvicorn/dev(prod).json`
+- `config/uvicorn/logger.json` will be the logger cfg for uvicorn
+- app loads `config/dev(prod).cfg` as env config
 - app registers controllers and middlewares, which launches the import of all modules
 
 so we needed such references:
@@ -63,6 +68,8 @@ if you want to code your own logic then:
 - if logging is needed, call `get_logger` func from `application.xxx` to get the logger
 - cd to root dir and run `python3 ./main.py`
 
+全局性质的对象尽可能放到application中，unique service跟多实例的service都放到service下，后者用class封装就好了
+
 ### Requests and Responses
 
 all handled requests have status code of 200
@@ -84,6 +91,8 @@ The base schema of response body is:
 }
 ```
 
+所有能处理走到逻辑的都返回200，由success和code控制处理结果。不能处理或处理出exception的，由fastapi底层代理
+
 ### export your requirements
 
 while working collaboratively, each member should synchronize the libraries if needed
@@ -92,4 +101,6 @@ run `pip freeze > requirements.txt` or `./script/export.sh` (if venv dir include
 
 ## TODO
 
-- deployment setting
+- deployment
+- testing
+- RBAC

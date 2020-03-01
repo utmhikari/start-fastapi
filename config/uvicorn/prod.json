@@ -1,11 +1,12 @@
 {
-  "fastapi": {
+  "app": {
     "host": "0.0.0.0",
     "port": 8000,
     "reload": false,
     "debug": false,
+    "access_log": true,
     "use_colors": true,
-    "env_file": "prod.cfg"
+    "env_file": "config/prod.cfg"
   },
   "logger": {
     "path": "logger.json"

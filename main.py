@@ -5,13 +5,19 @@ import getopt
 import os
 import json
 
+"""
+MAIN ENTRY OF START_FASTAPI
+WHICH LOADS CONFIG FOR UVICORN BUT NOT FOR FASTAPI APP
+JUST MODIFY CONFIGS IN config/app IF NEEDED
+"""
+
 # load application config
 _CONFIG: Dict[str, Any] = dict()
-_CONFIG_ROOT: str = 'config/app'
+_CONFIG_ROOT: str = 'config/uvicorn'
 _DEV_CONFIG_PATH: str = 'dev.json'
 _PROD_CONFIG_PATH: str = 'prod.json'
 _APP_MODE: str = 'dev'
-_APP_KEY: str = 'fastapi'
+_APP_KEY: str = 'app'
 _LOGGER_KEY: str = 'logger'
 
 
