@@ -62,10 +62,10 @@ the whole initial project is the example, cd to root dir and run `./script/dev.s
 
 if you want to code your own logic then:
 
-- add controller routes in `config/router.py` and write corresponding callbacks in `./controller`
-- according to your controllers, write pylibs in `./service`
-- write models in `./model` for services and controllers to enhance the robustness of code
-- write middlewares if necessary
+- add controller routes in `config/router.py` and add corresponding callbacks in `./controller`
+- according to your controllers, add unique or multi-instance services in `./service`
+- add data models in `./model` for services and controllers
+- add middlewares if necessary, see [fastapi middleware](https://fastapi.tiangolo.com/tutorial/middleware/)
 - if logging is needed, call `get_logger` func from `application.xxx` to get the logger
 - cd to root dir and run `python3 ./main.py`
 
