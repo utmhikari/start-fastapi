@@ -21,6 +21,10 @@ _APP_KEY: str = 'app'
 _LOGGER_KEY: str = 'logger'
 
 
+def _print(*args):
+    print(*args, file=sys.stderr)
+
+
 def _get_cfg_json(*args) -> Dict:
     """
     load json config from specific config path
@@ -59,7 +63,7 @@ def _load_cfg(mode: str):
                 try:
                     log_config = _get_cfg_json(log_cfg_path)
                 except Exception as e:
-                    print('Failed to load logger config at %s! %s' % (log_cfg_path, e))
+                    _print('Failed to load logger config at %s! %s' % (log_cfg_path, e))
             if not log_config and 'content' in raw_logger_cfg.keys():
                 log_config = raw_logger_cfg['content']
         if log_config and isinstance(log_config, dict):
@@ -72,14 +76,14 @@ def main():
         opts, args = getopt.getopt(sys.argv[1:], 'e:', ['env='])  # no error handling here
     except getopt.GetoptError as e:
         raise e
+    env = 'dev'
     for o, a in opts:
         if o == '-e':
             if a == 'prod':
-                _load_cfg('prod')
+                env = 'prod'
+    _load_cfg(env)
     if not _CONFIG:
-        _load_cfg('dev')
-        if not _CONFIG:
-            raise Exception('Failed to load config!')
+        raise Exception('Failed to load config!')
     # run application
     uvicorn.run('app:app', **_CONFIG[_APP_KEY])
 

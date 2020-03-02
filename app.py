@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from application import router
 import os
+import sys
 from typing import Dict, Any
 import pprint
 
@@ -26,4 +27,4 @@ router.register_controllers(app)
 router.register_middlewares(app)
 
 print('Launching application: %s\n%s' %
-      (app_name, pprint.pformat(fastapi_cfg, indent=2, width=50)))
+      (app_name, pprint.pformat(fastapi_cfg, indent=2, width=50)), file=sys.stderr)
