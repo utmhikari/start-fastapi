@@ -100,8 +100,13 @@ while working collaboratively, each member should synchronize the libraries if n
 
 run `pip freeze > requirements.txt` or `./script/export.sh` (if venv dir included) before commit
 
+## Deployment
+
+run `./script/pack.sh` to pack the project into `./build/start-fastapi.tar.gz`
+
+if docker deployment is needed, take reference to `./build/Dockerfile`
+
 ## TODO
 
-- deployment
 - testing
 - RBAC

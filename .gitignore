@@ -1,9 +1,10 @@
 .idea/
 *.iml
-build/
+tmp/
 dist/
 __pycache__/
 *.pyc
-tmp/
 venv/
 .venv/
+*.gz
+*.tar.gz
