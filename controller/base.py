@@ -1,9 +1,10 @@
 from application.controller import success
 from application.logger import get_controller_logger
+from application import config
 from fastapi import APIRouter, UploadFile, File
-import os
+from util.common import md5hash
 
-app_name = os.getenv('APP_NAME')
+app_name = config.get('APP_NAME')
 
 router = APIRouter()
 
@@ -13,7 +14,8 @@ LOGGER = get_controller_logger('BASE')
 @router.get('/health')
 def health_check():
     return success({
-        'name': app_name
+        'name': app_name,
+        'hash': md5hash(app_name),
     })
 
 

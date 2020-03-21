@@ -26,14 +26,18 @@ a lightweight web server framework based on fastapi
 
 非常经典的的洋葱圈模型
 
-- application: base apis for app modules (controllers, middlewares, services, router, etc)
-- config: config files (json)
+- application: base apis for app modules (config, logger, router, etc)
+- build: build scripts like Dockerfile
+- config: config files (json and python dotenv)
 - controller: controller modules with router callbacks
 - middleware: middlewares
 - model: internal data models for typing check
+- script: user defined scripts
 - service: service libraries
-- test: custom test scripts
-- main.py: server entry
+- test: custom python scripts for testing modules
+- util: util libraries
+- app.py: fastapi application entry
+- main.py: uvicorn entry
 
 ## Configuration
 
