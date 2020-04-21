@@ -60,7 +60,9 @@ references on configuring dev.cfg or prod.cfg:
 
 - [python-dotenv](https://github.com/theskumar/python-dotenv)
 
-## Example
+## Quick Start
+
+### Run Application
 
 the whole initial project is the example, cd to root dir and run `./script/dev.sh` to start the server
 
@@ -79,11 +81,11 @@ if you want to code your own logic then:
 
 all handled requests have status code of 200
 
-if a request is not successfully handled, users should call `error` in `application.controller` to wrap the response body
+if a request is not being successfully handled, users should call `error` in `application.controller` to wrap the response body
 
 otherwise, call `success` in `application.controller` to wrap the resp body
 
-The request body schema is defined on user, view [FastAPI Request Body](https://fastapi.tiangolo.com/tutorial/body/) for details
+view [FastAPI Request Body](https://fastapi.tiangolo.com/tutorial/body/) for details
 
 The base schema of response body is:
 
@@ -98,17 +100,21 @@ The base schema of response body is:
 
 所有能处理走到逻辑的都返回200，由success和code控制处理结果。不能处理或处理出exception的，由fastapi底层代理
 
-### export your requirements
+### WebSocket
 
-while working collaboratively, each member should synchronize the libraries if needed
+take reference to [websocket documentation] to view the usage
 
-run `pip freeze > requirements.txt` or `./script/export.sh` (if venv dir included) before commit
+websocket server holds the same port as http server's
+
+### Export Dependencies
+
+run `pip freeze > requirements.txt` or `./script/export.sh` (if venv dir included) to export dependencies
 
 ## Deployment
 
 run `./script/pack.sh` to pack the project into `./build/start-fastapi.tar.gz`
 
-if docker deployment is needed, take reference to `./build/Dockerfile`
+take reference to `./build/Dockerfile` for docker deployment
 
 ## TODO
 

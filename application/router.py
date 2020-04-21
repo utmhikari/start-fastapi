@@ -1,4 +1,4 @@
-from controller import base, item
+from controller import base, item, websocket
 from middleware import connection
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
@@ -13,6 +13,7 @@ def register_controllers(app: FastAPI) -> None:
     """
     app.include_router(base.router)
     app.include_router(item.router)
+    app.include_router(websocket.router)
 
 
 def register_middlewares(app: FastAPI) -> None:

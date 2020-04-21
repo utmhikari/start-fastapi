@@ -16,7 +16,7 @@ def get_item(item_id: int) -> Item:
 
 
 def update_item(item_id: int, item: Item) -> bool:
-    if item_id in _ITEMS.keys():
-        _ITEMS[item_id] = item
-        return True
-    return False
+    if item_id not in _ITEMS.keys():
+        return False
+    _ITEMS[item_id] = item
+    return True
