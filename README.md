@@ -100,6 +100,8 @@ The base schema of response body is:
 
 所有能处理走到逻辑的都返回200，由success和code控制处理结果。不能处理或处理出exception的，由fastapi底层代理
 
+view controllers for different examples~
+
 ### WebSocket
 
 take reference to [websocket documentation](https://fastapi.tiangolo.com/advanced/websockets/) to view the usage
