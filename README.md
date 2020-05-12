@@ -102,7 +102,7 @@ The base schema of response body is:
 
 ### WebSocket
 
-take reference to [websocket documentation] to view the usage
+take reference to [websocket documentation](https://fastapi.tiangolo.com/advanced/websockets/) to view the usage
 
 websocket server holds the same port as http server's
 
