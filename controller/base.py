@@ -13,10 +13,10 @@ LOGGER = get_controller_logger('BASE')
 
 @router.get('/health')
 def health_check():
-    return success({
+    return success(data={
         'name': app_name,
         'hash': md5hash(app_name),
-    })
+    }, msg='Yes OK~')
 
 
 @router.post('/upload')

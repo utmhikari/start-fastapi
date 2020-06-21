@@ -8,3 +8,4 @@ venv/
 .venv/
 *.gz
 *.tar.gz
+.pytest_cache/

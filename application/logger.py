@@ -1,6 +1,14 @@
 import logging
 
 
+def get_application_logger():
+    """
+    get application logger
+    :return:
+    """
+    return logging.getLogger('APPLICATION')
+
+
 def get_controller_logger(name):
     """
     get controller logger

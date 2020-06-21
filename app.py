@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from application import router, config
+from application import router, config, logger
 from util.common import pfmt
 import sys
 from typing import Dict, Any
@@ -28,5 +28,14 @@ app = FastAPI(**fastapi_cfg)
 router.register_controllers(app)
 router.register_middlewares(app)
 
-print('Launching application: %s\n%s' %
-      (app_name, pfmt(fastapi_cfg)), file=sys.stderr)
+LOGGER = logger.get_application_logger()
+
+
+@app.on_event('startup')
+async def start_app():
+    LOGGER.info('Launching application: %s\n%s' % (app_name, pfmt(fastapi_cfg)))
+
+
+@app.on_event('shutdown')
+async def shutdown_app():
+    LOGGER.info('Shutdown application~')

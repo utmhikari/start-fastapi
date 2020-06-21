@@ -19,7 +19,7 @@ a lightweight web server framework based on fastapi
 ## Requirements
 
 - python 3.6+ (for static typing check)
-- `pip3 install -r ./requirements.txt` (using venv is recommended)
+- `pip3 install -r ./requirements.txt` (recommended using venv)
 - idea/pycharm (optional but recommended)
 
 ## Structure
@@ -72,7 +72,7 @@ if you want to code your own logic then:
 - according to your controllers, add unique or multi-instance services in `./service`
 - add data models in `./model` for services and controllers
 - add middlewares if necessary, see [fastapi middleware](https://fastapi.tiangolo.com/tutorial/middleware/)
-- if logging is needed, call `get_logger` func from `application.xxx` to get the logger
+- call `get_logger` func from `application.xxx` to get the logger
 - cd to root dir and run `python3 ./main.py`
 
 全局性质的对象尽可能放到application中，unique service跟多实例的service都放到service下，后者用class封装就好了
@@ -112,6 +112,17 @@ websocket server holds the same port as http server's
 
 run `pip freeze > requirements.txt` or `./script/export.sh` (if venv dir included) to export dependencies
 
+## Testing
+
+GET `/docs` to test the routers on web page
+
+see `./test/client.py` for script example, which took reference from fastapi docs:
+
+- [testing](https://fastapi.tiangolo.com/tutorial/testing/)
+- [testing-websockets](https://fastapi.tiangolo.com/advanced/testing-websockets/)
+
+exec `./script/test.sh ./test/client.py` to start your test
+
 ## Deployment
 
 run `./script/pack.sh` to pack the project into `./build/start-fastapi.tar.gz`
@@ -120,5 +131,4 @@ take reference to `./build/Dockerfile` for docker deployment
 
 ## TODO
 
-- testing
 - RBAC
