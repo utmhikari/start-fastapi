@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from application import router, config, logger
-from util.common import pfmt
+from application.util import pfmt
 import sys
 from typing import Dict, Any
 import pprint

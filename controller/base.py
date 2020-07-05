@@ -2,7 +2,7 @@ from application.controller import success
 from application.logger import get_controller_logger
 from application import config
 from fastapi import APIRouter, UploadFile, File
-from util.common import md5hash
+from application.util import md5hash
 
 app_name = config.get('APP_NAME')
 
