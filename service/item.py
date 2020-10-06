@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 from model.item import Item
 from application.logger import get_service_logger
 import time, pprint
@@ -9,11 +9,27 @@ _ITEMS: Dict[int, Item] = {
     1: Item(name='haha', price=1.1),
     22: Item(name='hehe', price=2.2),
     333: Item(name='gogo', price=3.3, is_offer=False),
+    99: Item(name='ronaldo', price=10000.00, is_offer=False)
 }
 
 
 def get_item(item_id: int) -> Item:
     return _ITEMS.get(item_id, None)
+
+
+def get_items(keyword: str = '',
+              min_price: float = -1.0,
+              max_price: float = -1.0) -> List[Item]:
+    items = []
+    for _, item in _ITEMS.items():
+        if keyword and keyword not in item.name:
+            continue
+        if min_price > 0.0 and min_price > item.price:
+            continue
+        if 0.0 < max_price < item.price:
+            continue
+        items.append(item)
+    return items
 
 
 def update_item(item_id: int, item: Item) -> bool:

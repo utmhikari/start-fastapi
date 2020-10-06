@@ -13,6 +13,10 @@ LOGGER = get_controller_logger('BASE')
 
 @router.get('/health')
 def health_check():
+    """
+    basic example
+    :return:
+    """
     return success(data={
         'name': app_name,
         'hash': md5hash(app_name),
@@ -21,6 +25,11 @@ def health_check():
 
 @router.post('/upload')
 async def upload_file(file: UploadFile = File(...)):
+    """
+    an example of uploading file
+    :param file:
+    :return:
+    """
     filename = file.filename
     content = await file.read()
     decoded_content = content.decode('utf-8')

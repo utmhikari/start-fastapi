@@ -8,12 +8,12 @@ import hashlib
 import json
 
 
-def jsondump(o: Any) -> str:
+def jsondump(o: Any, **kwargs) -> str:
     """
     json dump object
     :return:
     """
-    return json.dumps(o, indent=2, ensure_ascii=False)
+    return json.dumps(o, indent=2, ensure_ascii=False, **kwargs)
 
 
 def md5hash(s: str, length: int = 16) -> str:
