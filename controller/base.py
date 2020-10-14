@@ -11,7 +11,7 @@ router = APIRouter()
 LOGGER = get_controller_logger('BASE')
 
 
-@router.get('/health')
+@router.get('/v1/health')
 def health_check():
     """
     basic example
@@ -23,7 +23,7 @@ def health_check():
     }, msg='Yes OK~')
 
 
-@router.post('/upload')
+@router.post('/v1/upload')
 async def upload_file(file: UploadFile = File(...)):
     """
     an example of uploading file

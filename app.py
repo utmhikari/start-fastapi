@@ -4,6 +4,7 @@ from application.util import pfmt
 import sys
 from typing import Dict, Any
 import pprint
+from starlette.routing import Route, WebSocketRoute
 
 """
 USE os.getenv() TO GET ENV VARS IN dev.cfg OR prod.cfg
@@ -34,6 +35,19 @@ LOGGER = logger.get_application_logger()
 @app.on_event('startup')
 async def start_app():
     LOGGER.info('Launching application: %s\n%s' % (app_name, pfmt(fastapi_cfg)))
+    # dump routers
+    LOGGER.info('ROUTERS:')
+    for route in app.routes:
+        if isinstance(route, Route):
+            LOGGER.info('HTTP Router %s: %s %s' %
+                        (route.name, route.path, route.methods))
+        elif isinstance(route, WebSocketRoute):
+            LOGGER.info('WebSocket Router %s: %s ' %
+                        (route.name, route.path))
+    # dump user middlewares
+    LOGGER.info('USER MIDDLEWARES:')
+    for user_middleware in app.user_middleware:
+        LOGGER.info(repr(user_middleware))
 
 
 @app.on_event('shutdown')

@@ -73,7 +73,7 @@ def _load_cfg(mode: str):
 def main():
     # get application config
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'e:', ['env='])  # no error handling here
+        opts, args = getopt.getopt(sys.argv[1:], 'e:t:', ['env=', 'tag='])  # no error handling here
     except getopt.GetoptError as e:
         raise e
     env = 'dev'
@@ -81,6 +81,8 @@ def main():
         if o == '-e':
             if a == 'prod':
                 env = 'prod'
+        elif o == '-t':
+            _print('launch app with tag: %s' % a)
     _load_cfg(env)
     if not _CONFIG:
         raise Exception('Failed to load config!')

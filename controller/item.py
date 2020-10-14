@@ -10,7 +10,7 @@ router = APIRouter()
 LOGGER = get_controller_logger('ITEM')
 
 
-@router.get('/item/{item_id}')
+@router.get('/v1/item/{item_id}')
 def get_item(item_id: int):
     """
     get item info by item id
@@ -23,7 +23,7 @@ def get_item(item_id: int):
     return success(item)
 
 
-@router.get('/items')
+@router.get('/v1/items')
 def get_items(keyword: Optional[str] = '',
               min_price: Optional[float] = -1.0,
               max_price: Optional[float] = -1.0):
@@ -37,7 +37,7 @@ def get_items(keyword: Optional[str] = '',
     return success(data=items)
 
 
-@router.put('/item/{item_id}')
+@router.put('/v1/item/{item_id}')
 def update_item(item_id: int, item: Item):
     """
     update item info by item id
@@ -50,7 +50,7 @@ def update_item(item_id: int, item: Item):
     return success(item)
 
 
-@router.get('/items/print')
+@router.get('/v1/items/print')
 def print_items(background_tasks: BackgroundTasks):
     """
     print item info in background

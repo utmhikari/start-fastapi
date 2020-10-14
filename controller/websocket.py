@@ -9,14 +9,14 @@ LOGGER = logger.get_controller_logger('WEBSOCKET')
 router = APIRouter()
 
 
-@router.websocket('/')
-async def get_main(websocket: WebSocket):
+@router.websocket('/v1/health')
+async def health_check(websocket: WebSocket):
     await websocket.accept()
     await websocket.send_json(success(msg='hello world'))
     await websocket.close()
 
 
-@router.websocket('/items')
+@router.websocket('/v1/items')
 async def get_item_info(websocket: WebSocket):
     await websocket.accept()
     while True:
