@@ -30,15 +30,16 @@ Based on [FastAPI](https://github.com/tiangolo/fastapi), an easy-to-use web app 
     - prod.json: cfg for uvicorn of prod mode
 - controller: controller modules with router callbacks
 - middleware: web app middlewares
+- misc: misc items
+  - script: user defined scripts
+    - dev.sh: run app in dev mode
+    - prod.sh: run app in prod mode
+    - pack.sh: pack the web-app project
+    - export.sh: dump requirements
+    - test.sh: run test for routers
+  - test: custom python scripts for testing modules
 - model: internal data models for typing check
-- script: user defined scripts
-  - dev.sh: run app in dev mode
-  - prod.sh: run app in prod mode
-  - pack.sh: pack the web-app project
-  - export.sh: dump requirements
-  - test.sh: run test for routers
 - service: service libraries
-- test: custom python scripts for testing modules
 - app.py: fastapi application entry
 - main.py: uvicorn entry
 
@@ -110,6 +111,8 @@ See `./test/client.py` for script example, which took reference from fastapi doc
 - [testing-websockets](https://fastapi.tiangolo.com/advanced/testing-websockets/)
 
 Run `./script/test.sh ./test/client.py` to start your test
+
+Using Postman or Insomnia is also recommended~
 
 ### Deployment
 

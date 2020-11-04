@@ -9,6 +9,6 @@
     "env_file": "config/prod.cfg"
   },
   "logger": {
-    "path": "logger.json"
+    "path": "logger_prod.json"
   }
 }

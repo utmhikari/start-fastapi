@@ -2,13 +2,13 @@
   "app": {
     "host": "0.0.0.0",
     "port": 8000,
-    "reload": true,
+    "reload": false,
     "debug": false,
     "access_log": false,
     "use_colors": true,
     "env_file": "config/dev.cfg"
   },
   "logger": {
-    "path": "logger.json"
+    "path": "logger_dev.json"
   }
 }
