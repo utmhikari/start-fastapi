@@ -50,7 +50,7 @@ def update_item(item_id: int, item: Item):
     return success(item)
 
 
-@router.get('/v1/items/print')
+@router.get('/v1/items/print/instant')
 def print_items(background_tasks: BackgroundTasks):
     """
     print item info in background
@@ -58,3 +58,14 @@ def print_items(background_tasks: BackgroundTasks):
     """
     background_tasks.add_task(item_service.print_items_one_by_one, 1)
     return success(msg='Printing items now~')
+
+
+@router.get('/v1/items/print/delay')
+def delay_print_items(background_tasks: BackgroundTasks):
+    """
+    print item info in delayed mode
+    :param background_tasks:
+    :return:
+    """
+    background_tasks.add_task(item_service.print_items_one_by_one_in_another_process)
+    return success(msg='launched print items delayed!')

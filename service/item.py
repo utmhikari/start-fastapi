@@ -1,7 +1,9 @@
 from typing import Dict, List
 from model.item import Item
 from application.logger import get_service_logger
-import time, pprint
+import time
+import pprint
+from application import concurrency
 
 LOGGER = get_service_logger('ITEM')
 
@@ -42,7 +44,24 @@ def update_item(item_id: int, item: Item) -> bool:
 def print_items_one_by_one(interval: int = 3):
     if interval <= 0:
         interval = 3
+    LOGGER.info('Start printing items!')
     for item_id, item_info in _ITEMS.items():
         LOGGER.info('Item %d: %s' % (item_id, pprint.pformat(item_info)))
+        time.sleep(interval)
+    LOGGER.info('Finish printing items!')
+
+
+def __print_single_item(tag: str = 'UNKNOWN', item: Item = Item(name='', price=0.0)):
+    LOGGER.info('[%s] %s' % (tag, item.json()))
+
+
+async def print_items_one_by_one_in_another_process(interval: int = 3):
+    if interval <= 0:
+        interval = 3
+    LOGGER.info('Start printing items!')
+    for item_id, item_info in _ITEMS.items():
+        await concurrency.run_in_processpool(__print_single_item,
+                                             str(item_id),
+                                             item=item_info)
         time.sleep(interval)
     LOGGER.info('Finish printing items!')
