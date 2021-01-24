@@ -1,105 +1,83 @@
-from typing import Dict, Any
-import uvicorn
-import sys
 import getopt
-import os
 import json
+import os
+import sys
+from typing import Dict, Any
 
-"""
-MAIN ENTRY OF START_FASTAPI
-WHICH LOADS CONFIG FOR UVICORN BUT NOT FOR FASTAPI APP
-JUST MODIFY CONFIGS IN config/app IF NEEDED
-"""
+import uvicorn
 
-# load application config
-CONFIG: Dict[str, Any] = dict()
-CONFIG_ROOT: str = 'config/uvicorn'
-DEV_CONFIG_PATH: str = 'dev.json'
-PROD_CONFIG_PATH: str = 'prod.json'
-APP_MODE: str = 'dev'
-APP_KEY: str = 'app'
-LOGGER_KEY: str = 'logger'
+from core.lib import util
 
 
-def __print(*args):
-    print(*args, file=sys.stderr)
-
-
-def __get_cfg_json(*args) -> Dict:
+def get_cmd_opts() -> Dict[str, Any]:
     """
-    load json config from specific config path
-    :param args: path
-    :return: json config
+    get commandline opts
+    :return: cmd options
     """
-    return json.loads(open(os.path.join(CONFIG_ROOT, *args)).read())
-
-
-def __load_cfg(mode: str):
-    """
-    load config from path to _CONFIG
-    :param mode: application mode (dev or prod)
-    :return: None
-    """
-    # get application mode
-    if not mode == 'prod' and not mode == 'dev':
-        raise Exception('Unknown application mode')
-    global CONFIG
-    global APP_MODE
-    APP_MODE = mode
-    if APP_MODE == 'dev':
-        CONFIG = __get_cfg_json(DEV_CONFIG_PATH)
-    else:
-        CONFIG = __get_cfg_json(PROD_CONFIG_PATH)
-    # check if app config is loaded
-    if APP_KEY not in CONFIG.keys():
-        raise Exception('Failed to load application config')
-    # load logger config
-    if LOGGER_KEY in CONFIG.keys():
-        log_config = None
-        raw_logger_cfg = CONFIG[LOGGER_KEY]
-        if isinstance(raw_logger_cfg, dict):
-            if 'path' in raw_logger_cfg.keys():
-                log_cfg_path = str(raw_logger_cfg['path'])
-                try:
-                    log_config = __get_cfg_json(log_cfg_path)
-                except Exception as e:
-                    __print('Failed to load logger config at %s! %s' % (log_cfg_path, e))
-            if not log_config and 'content' in raw_logger_cfg.keys():
-                log_config = raw_logger_cfg['content']
-        if log_config and isinstance(log_config, dict):
-            CONFIG[APP_KEY]['log_config'] = log_config
-
-
-def __preset_eventloop():
-    """
-    change SelectorEventLoop to ProactorEventLoop
-    :return:
-    """
-    from uvicorn.config import LOOP_SETUPS
-    LOOP_SETUPS['asyncio'] = 'application.compat:set_proactor_eventloop'
-
-
-def main():
-    # Windows users may need this for calling some methods in asyncio
-    # DO NOT ENABLE RELOAD IF U AIM TO CHANGE THE EVENTLOOP POLICY!!!
-    # __preset_eventloop()
-    # get application config
+    # get options
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'e:t:', ['env=', 'tag='])  # no error handling here
+        opts, _ = getopt.getopt(
+            sys.argv[1:],
+            'e:t:',
+            ['env=', 'tag=']
+        )
     except getopt.GetoptError as e:
         raise e
-    env = 'dev'
+    t = {
+        'env': 'dev',
+        'tag': ''
+    }
     for o, a in opts:
         if o == '-e':
-            if a == 'prod':
-                env = 'prod'
+            t['env'] = a
         elif o == '-t':
-            __print('launch app with tag: %s' % a)
-    __load_cfg(env)
-    if not CONFIG:
-        raise Exception('Failed to load config!')
-    # run application
-    uvicorn.run('app:app', loop='asyncio', **CONFIG[APP_KEY])
+            t['tag'] = a
+    return t
+
+
+def load_cfg(env: str):
+    """
+    load configs
+    :param env: app env
+    :return:
+    """
+    if not env:
+        raise Exception('env not specified')
+    cfg_dir = os.path.join('cfg', env)
+    assert os.path.isdir(cfg_dir)
+
+    # logger cfg
+    logger_cfgpath = os.path.join(cfg_dir, 'logger.json')
+    logger_cfg = json.loads(open(logger_cfgpath, encoding=util.ENCODING).read())
+    assert isinstance(logger_cfg, dict)
+
+    # uvicorn cfg
+    default_uvicorn_cfg = {
+        'log_config': logger_cfg,
+        'env_file': os.path.join(cfg_dir, 'app.cfg'),
+        'loop': 'asyncio'
+    }
+    uvicorn_cfgpath = os.path.join(cfg_dir, 'uvicorn.json')
+    uvicorn_cfg = json.loads(open(uvicorn_cfgpath, encoding=util.ENCODING).read())
+    assert isinstance(uvicorn_cfg, dict)
+
+    return dict(default_uvicorn_cfg, **uvicorn_cfg)
+
+
+def main() -> None:
+    """
+    main function, steps are:
+    1. Get cmd opts with the current environment (dev/prod)
+    2. Read configs by env (uvicorn.json, logger.json)
+    3. Run uvicorn application, launch APP in app/__init__.py
+    for more uvicorn args, refer to uvicorn/config.py
+    :return: None
+    """
+    opts = get_cmd_opts()
+    print('launch uvicorn with cmd opts: %s' % util.pfmt(opts))
+    cfg = load_cfg(opts['env'])
+    print('launch uvicorn with cfg: %s' % util.pfmt(cfg, width=120))
+    uvicorn.run('app:APP', **cfg)
 
 
 if __name__ == '__main__':

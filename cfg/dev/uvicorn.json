@@ -1,0 +1,8 @@
+{
+  "host": "0.0.0.0",
+  "port": 8000,
+  "reload": true,
+  "debug": true,
+  "access_log": false,
+  "use_colors": true
+}
