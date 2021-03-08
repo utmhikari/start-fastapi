@@ -5,6 +5,7 @@ from fastapi import APIRouter
 
 from ..lib import logger
 from ..service import trans as trans_service
+from ..model.handler import Resp
 
 LOGGER = logger.for_handler('trans')
 ROUTER = APIRouter()
@@ -17,4 +18,7 @@ def get_trans_handlers():
     :return:
     """
     trans_manager = trans_service.get_manager()
-    trans_manager.handlers
+    handlers = {}
+    for code, handler in trans_manager.handlers.items():
+        handlers[code.value] = str(handler.__name__)
+    return Resp.ok(data=handlers)
