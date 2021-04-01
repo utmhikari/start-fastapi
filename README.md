@@ -15,7 +15,7 @@ Version 2021, based on [FastAPI](https://github.com/tiangolo/fastapi), an easy-t
 
 The web application is based on onion style~
 
-![onion](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604517336182&di=0f09d067f5e8512fbe22cb0373fab752&imgtype=0&src=http%3A%2F%2Fimg.shangdixinxi.com%2Fup%2Finfo%2F202001%2F20200130210409358062.png)
+![onion](http://www.zyiz.net/upload/202006/15/202006150525428099.png)
 
 The directory structure is:
 
