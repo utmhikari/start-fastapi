@@ -3,10 +3,23 @@ import json
 import os
 import sys
 from typing import Dict, Any
+import asyncio
 
 import uvicorn
 
 from core.lib import util
+
+
+def _set_proactor_eventloop() -> None:
+    """
+    set eventloop as ProactorEventLoop, maybe used in windows system
+    then in uvicorn main script, add these codes:
+    >>> from uvicorn.config import LOOP_SETUPS
+    >>> LOOP_SETUPS['asyncio'] = 'core.lib.aio:set_proactor_eventloop'
+    if proactor loop is set, do not enable reload in development
+    :return: None
+    """
+    asyncio.set_event_loop(asyncio.ProactorEventLoop())
 
 
 def get_cmd_opts() -> Dict[str, Any]:
