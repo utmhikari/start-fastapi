@@ -11,4 +11,4 @@ starlette==0.14.2
 typing-extensions==3.10.0.0
 uvicorn==0.13.3
 watchgod==0.6
-websockets==8.1
+websockets==9.1
