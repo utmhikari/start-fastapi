@@ -9,6 +9,7 @@ Version 2021, based on [FastAPI](https://github.com/tiangolo/fastapi), an easy-t
 
 - python 3.6+ (for static typing check)
 - `pip3 install -r ./requirements.txt`
+  - fastapi, uvicorn, python-dotenv, python-multipart, websockets, etc
 - idea/pycharm (recommended) + venv
 
 ## Structure
