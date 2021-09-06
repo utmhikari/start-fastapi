@@ -29,6 +29,7 @@ from core.model.handler import Resp
 from core.lib import util, logger
 from core.service import trans as trans_service
 
+
 LOGGER = logger.for_handler('{handler_name}')
 ROUTER = APIRouter()
 
@@ -114,7 +115,11 @@ from typing import List, Dict, Any, Tuple, Optional, Union, Callable
 
 from pydantic import BaseModel
 
+from core.lib import util, logger
 from core.model.base import PCallRet, ExecRet
+
+
+LOGGER = logger.for_model('{model_name}')
 
 
 class {model_name_camel}(BaseModel):
@@ -137,6 +142,7 @@ def gen_model(model_name: str):
               (model_name, model_path))
         return
     model_code = MODEL_TEMPLATE.format(
+        model_name=model_name,
         model_name_camel=snake_to_camel(model_name)
     )
     with open(model_path, mode='w', encoding=ENCODING) as f:
@@ -154,6 +160,9 @@ from typing import List, Dict, Any, Tuple, Optional, Union, Callable
 from core.model.base import PCallRet, ExecRet
 from core.lib import util, logger, cfg
 from core.service import trans as trans_service
+
+
+LOGGER = logger.for_service('{service_name}')
 
 
 def get_{service_name}s() -> None:
@@ -217,17 +226,17 @@ def gen_service(service_name: str):
 
 
 # ============= CONFIGS, SET NAMES AS SNAKE CASE ===============
-IS_GEN_HANDLER = True
+IS_GEN_HANDLER = False
 HANDLER_NAMES = [
     'item'
 ]
 
-IS_GEN_MODEL = True
+IS_GEN_MODEL = False
 MODEL_NAMES = [
     'item'
 ]
 
-IS_GEN_SERVICE = True
+IS_GEN_SERVICE = False
 SERVICE_NAMES = [
     'item'
 ]

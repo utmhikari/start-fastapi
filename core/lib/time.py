@@ -24,6 +24,16 @@ def __get_t(t: Optional[datetime.datetime] = None) -> datetime.datetime:
     return t if isinstance(t, datetime.datetime) else now()
 
 
+def to_date(s: str, fmt: str = '%Y-%m-%d %H:%M:%S.%f') -> datetime.datetime:
+    """
+    get datetime instance from string
+    :param s: datetime string
+    :param fmt: datetime format
+    :return: datetime instance
+    """
+    return datetime.datetime.strptime(s, fmt)
+
+
 def to_str(t: Optional[datetime.datetime] = None,
            fmt: str = '%Y-%m-%d %H:%M:%S.%f') -> str:
     """

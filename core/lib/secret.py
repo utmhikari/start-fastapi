@@ -2,6 +2,8 @@ import base64
 import hashlib
 from typing import Callable
 
+from . import time as timelib
+
 
 def base64_decode(base64_message: str) -> str:
     """
@@ -39,3 +41,16 @@ def hs(s: str, length: int = 16, hasher: Callable = hashlib.md5) -> str:
     if len(ret) > length:
         ret = ret[:length]
     return ret
+
+
+def randstr(length: int = 16, seed: str = '', hasher: Callable = hashlib.md5) -> str:
+    """
+    get a random string
+    :param length: string length
+    :param seed: generator seed
+    :param hasher: hash function
+    :return: (pseudo?) random string
+    """
+    if not seed:
+        seed = str(timelib.to_milliseconds())
+    return hs(seed, length, hasher)

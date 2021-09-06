@@ -1,6 +1,7 @@
 import time
 
 from core.lib import time as timelib
+from core.lib import secret
 
 if __name__ == '__main__':
     t = timelib.now()
@@ -13,3 +14,4 @@ if __name__ == '__main__':
     print(timelib.to_seconds_dt(dt))
     print(timelib.to_milliseconds_dt(dt))
     print(timelib.to_microseconds_dt(dt))
+    print(secret.randstr(8))

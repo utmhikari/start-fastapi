@@ -48,11 +48,11 @@ def get_cmd_opts() -> Dict[str, Any]:
     return t
 
 
-def load_cfg(env: str):
+def load_cfg(env: str) -> Dict[str, Any]:
     """
     load configs
     :param env: app env
-    :return:
+    :return: uvicorn cfg dict
     """
     if not env:
         raise Exception('env not specified')
