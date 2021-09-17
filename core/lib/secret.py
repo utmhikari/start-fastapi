@@ -19,6 +19,7 @@ def base64_decode(base64_message: str) -> str:
 def base64_encode(message: str) -> str:
     """
     base64 encode
+    if '\n' exists in encoded message, or another encoding is needed, just edit the codes
     :param message: message to be encoded
     :return: encoded base64 string
     """
